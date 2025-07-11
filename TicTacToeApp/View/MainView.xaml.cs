@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TicTacToeApp.ViewModel;
 
 namespace TicTacToeApp.View
 {
@@ -20,9 +21,13 @@ namespace TicTacToeApp.View
     /// </summary>
     public partial class MainView : UserControl
     {
+        MainViewModel ViewModel;
         public MainView()
         {
+            ViewModel = new MainViewModel();
+
             InitializeComponent();
+            DataContext = ViewModel;
         }
     }
 }
