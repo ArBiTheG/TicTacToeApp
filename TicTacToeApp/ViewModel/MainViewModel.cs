@@ -33,6 +33,8 @@ namespace TicTacToeApp.ViewModel
             _mainService = new MainService();
 
             _buttonStates = new ObservableCollection<ButtonState>(InitGridPositions(9));
+
+            UpdateMessage();
         }
 
         public string Message
@@ -79,6 +81,20 @@ namespace TicTacToeApp.ViewModel
             return motions;
         }
 
+        private void UpdateMessage()
+        {
+            var getStatus = _mainService.CurrentGameStatus;
+            switch (getStatus)
+            {
+                case GameStatus.WalkCross:
+                    Message = "Сейчас ходит Крестик";
+                    break;
+                case GameStatus.WalkZero:
+                    Message = "Сейчас ходит Нолик";
+                    break;
+            }
+        }
+
         private void SetSignToPosition(int id)
         {
             if (id >= 0 && id < _buttonStates.Count)
@@ -98,16 +114,7 @@ namespace TicTacToeApp.ViewModel
                         break;
                 }
 
-                var nextSign = _mainService.CurrentGameSign;
-                switch (nextSign)
-                {
-                    case GameSignType.Cross:
-                        Message = "Сейчас ходит Крестик";
-                        break;
-                    case GameSignType.Zero:
-                        Message = "Сейчас ходит Нолик";
-                        break;
-                }
+                UpdateMessage();
             }
         }
 
@@ -118,6 +125,8 @@ namespace TicTacToeApp.ViewModel
                 _buttonStates[id] = ButtonEmpty;
             }
             _mainService.ResetGame();
+
+            UpdateMessage();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

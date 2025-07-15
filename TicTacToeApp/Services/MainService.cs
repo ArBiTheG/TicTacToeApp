@@ -9,15 +9,15 @@ namespace TicTacToeApp.Services
 {
     internal class MainService
     {
-        private GameSignType _currentGameSign;
+        private GameStatus _gameStatus;
         private GameGrid _gameGrid;
         public MainService()
         {
-            _currentGameSign = GameSignType.Cross;
+            _gameStatus = GameStatus.WalkCross;
             _gameGrid = new GameGrid();
         }
 
-        public GameSignType CurrentGameSign => _currentGameSign;
+        public GameStatus CurrentGameStatus => _gameStatus;
 
         public GameSignType GetSign(int x, int y)
         {
@@ -34,17 +34,18 @@ namespace TicTacToeApp.Services
             {
                 if (_gameGrid[x,y]== GameSignType.None)
                 {
-                    GameSignType settedSign = _currentGameSign;
-                    if (settedSign == GameSignType.None)
-                        settedSign = GameSignType.Cross;
+                    GameSignType settedSign = GameSignType.None;
 
-                    _gameGrid[x,y] = settedSign;
-
-                    // Смена игрового знака на противоположный
-                    if (_currentGameSign == GameSignType.Cross)
-                        _currentGameSign = GameSignType.Zero;
-                    else
-                        _currentGameSign = GameSignType.Cross;
+                    if (_gameStatus == GameStatus.WalkCross)
+                    {
+                        _gameGrid[x, y] = settedSign = GameSignType.Cross;
+                        _gameStatus = GameStatus.WalkZero;
+                    }
+                    else if (_gameStatus == GameStatus.WalkZero)
+                    {
+                        _gameGrid[x, y] = settedSign = GameSignType.Zero;
+                        _gameStatus = GameStatus.WalkCross;
+                    }
 
                     return settedSign;
                 }
@@ -54,7 +55,7 @@ namespace TicTacToeApp.Services
 
         public void ResetGame()
         {
-            _currentGameSign = GameSignType.Cross;
+            _gameStatus = GameStatus.WalkCross;
             _gameGrid = new GameGrid();
         }
     }
