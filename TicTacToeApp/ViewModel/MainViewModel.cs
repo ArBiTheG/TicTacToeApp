@@ -10,6 +10,7 @@ using System.Windows.Media;
 using TicTacToeApp.Model;
 using TicTacToeApp.Services;
 using TicTacToeApp.Utils;
+using TicTacToeApp.View.ViewStates;
 
 namespace TicTacToeApp.ViewModel
 {
@@ -19,15 +20,19 @@ namespace TicTacToeApp.ViewModel
 
         private RelayCommand _newGameCommand;
         private RelayCommand _selectPositionCommand;
-        private ObservableCollection<Motion> _motions;
 
         private string _message;
+
+        private ObservableCollection<ButtonState> _buttonStates;
+        private readonly ButtonState ButtonCross = new ButtonState("X", 255, 0, 0);
+        private readonly ButtonState ButtonZero = new ButtonState("O", 0, 0, 255);
+        private readonly ButtonState ButtonEmpty = new ButtonState();
 
         public MainViewModel()
         {
             _mainService = new MainService();
 
-            _motions = new ObservableCollection<Motion>(InitGridPositions(9));
+            _buttonStates = new ObservableCollection<ButtonState>(InitGridPositions(9));
         }
 
         public string Message
@@ -39,16 +44,16 @@ namespace TicTacToeApp.ViewModel
             }
         }
 
-        public ObservableCollection<Motion> Motions
+        public ObservableCollection<ButtonState> ButtonStates
         {
-            get => _motions;
+            get => _buttonStates;
         }
 
         public RelayCommand NewGameCommand 
         {
             get => _newGameCommand ?? new RelayCommand((obj) =>
             {
-
+                ClearAllPosition();
             });
         }
 
@@ -59,51 +64,61 @@ namespace TicTacToeApp.ViewModel
                 if (obj != null)
                 {
                     int id = int.Parse(obj.ToString() ?? "-1");
-                    SetXToPosition(id);
+                    SetSignToPosition(id);
                 }
-
             });
         }
 
-        private Motion[] InitGridPositions(int value)
+        private ButtonState[] InitGridPositions(int value)
         {
-            var motions = new Motion[value];
+            var motions = new ButtonState[value];
             for (int i = 0; i < value; i++)
             {
-                motions[i] = Motion.Empty;
+                motions[i] = ButtonEmpty;
             }
             return motions;
         }
 
-        private void SetMotionPosition(int id, Motion motion)
+        private void SetSignToPosition(int id)
         {
-            if (id >= 0 && id < _motions.Count)
-                _motions[id] = Motion.X;
-        }
-        private void SetXToPosition(int id)
-        {
-            SetMotionPosition(id, Motion.X);
-        }
+            if (id >= 0 && id < _buttonStates.Count)
+            {
+                int x = id % GameGrid.SizeX;
+                int y = id / GameGrid.SizeY;
 
-        private void SetOToPosition(int id)
-        {
-            SetMotionPosition(id, Motion.O);
-        }
+                var sign = _mainService.SetSign(x, y);
 
-        private void ClearPosition(int id)
-        {
-            SetMotionPosition(id, Motion.Empty);
+                switch (sign)
+                {
+                    case GameSignType.Cross:
+                        ButtonStates[id] = ButtonCross;
+                        break;
+                    case GameSignType.Zero:
+                        ButtonStates[id] = ButtonZero;
+                        break;
+                }
+
+                var nextSign = _mainService.CurrentGameSign;
+                switch (nextSign)
+                {
+                    case GameSignType.Cross:
+                        Message = "Сейчас ходит Крестик";
+                        break;
+                    case GameSignType.Zero:
+                        Message = "Сейчас ходит Нолик";
+                        break;
+                }
+            }
         }
 
         private void ClearAllPosition()
         {
-            for (int id = 0; id < _motions.Count; id++)
+            for (int id = 0; id < _buttonStates.Count; id++)
             {
-                SetMotionPosition(id, Motion.Empty);
+                _buttonStates[id] = ButtonEmpty;
             }
+            _mainService.ResetGame();
         }
-
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -38,31 +38,31 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Margin="2" Grid.Row="0" Grid.Column="0" Content="{Binding Motions[0].Sign}" Foreground="{Binding Motions[0].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="0">
+                    <Button Margin="2" Grid.Row="0" Grid.Column="0" Content="{Binding ButtonStates[0].Text}" Foreground="{Binding ButtonStates[0].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="0">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="0" Grid.Column="1" Content="{Binding Motions[1].Sign}" Foreground="{Binding Motions[1].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="1">
+                    <Button Margin="2" Grid.Row="0" Grid.Column="1" Content="{Binding ButtonStates[1].Text}" Foreground="{Binding ButtonStates[1].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="1">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="0" Grid.Column="2" Content="{Binding Motions[2].Sign}" Foreground="{Binding Motions[2].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="2">
+                    <Button Margin="2" Grid.Row="0" Grid.Column="2" Content="{Binding ButtonStates[2].Text}" Foreground="{Binding ButtonStates[2].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="2">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="1" Grid.Column="0" Content="{Binding Motions[3].Sign}" Foreground="{Binding Motions[3].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="3">
+                    <Button Margin="2" Grid.Row="1" Grid.Column="0" Content="{Binding ButtonStates[3].Text}" Foreground="{Binding ButtonStates[3].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="3">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="1" Grid.Column="1" Content="{Binding Motions[4].Sign}" Foreground="{Binding Motions[4].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="4">
+                    <Button Margin="2" Grid.Row="1" Grid.Column="1" Content="{Binding ButtonStates[4].Text}" Foreground="{Binding ButtonStates[4].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="4">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="1" Grid.Column="2" Content="{Binding Motions[5].Sign}" Foreground="{Binding Motions[5].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="5">
+                    <Button Margin="2" Grid.Row="1" Grid.Column="2" Content="{Binding ButtonStates[5].Text}" Foreground="{Binding ButtonStates[5].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="5">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="2" Grid.Column="0" Content="{Binding Motions[6].Sign}" Foreground="{Binding Motions[6].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="6">
+                    <Button Margin="2" Grid.Row="2" Grid.Column="0" Content="{Binding ButtonStates[6].Text}" Foreground="{Binding ButtonStates[6].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="6">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="2" Grid.Column="1" Content="{Binding Motions[7].Sign}" Foreground="{Binding Motions[7].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="7">
+                    <Button Margin="2" Grid.Row="2" Grid.Column="1" Content="{Binding ButtonStates[7].Text}" Foreground="{Binding ButtonStates[7].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="7">
                         
                     </Button>
-                    <Button Margin="2" Grid.Row="2" Grid.Column="2" Content="{Binding Motions[8].Sign}" Foreground="{Binding Motions[8].Color}" Command="{Binding SelectPositionCommand}" CommandParameter="8">
+                    <Button Margin="2" Grid.Row="2" Grid.Column="2" Content="{Binding ButtonStates[8].Text}" Foreground="{Binding ButtonStates[8].Foreground}" Command="{Binding SelectPositionCommand}" CommandParameter="8">
 
                     </Button>
                 </Grid>
