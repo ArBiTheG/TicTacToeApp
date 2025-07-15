@@ -24,8 +24,8 @@ namespace TicTacToeApp.ViewModel
         private string _message;
 
         private ObservableCollection<ButtonState> _buttonStates;
-        private readonly ButtonState ButtonCross = new ButtonState("X", 255, 0, 0);
-        private readonly ButtonState ButtonZero = new ButtonState("O", 0, 0, 255);
+        private readonly ButtonState ButtonCross = new ButtonState("X", 255, 64, 96);
+        private readonly ButtonState ButtonZero = new ButtonState("O", 64, 96, 255);
         private readonly ButtonState ButtonEmpty = new ButtonState();
 
         public MainViewModel()
@@ -86,6 +86,15 @@ namespace TicTacToeApp.ViewModel
             var getStatus = _mainService.CurrentGameStatus;
             switch (getStatus)
             {
+                case GameStatus.WinNobody:
+                    Message = "Ничья";
+                    break;
+                case GameStatus.WinCross:
+                    Message = "Крестик победил";
+                    break;
+                case GameStatus.WinZero:
+                    Message = "Нолик победил";
+                    break;
                 case GameStatus.WalkCross:
                     Message = "Сейчас ходит Крестик";
                     break;

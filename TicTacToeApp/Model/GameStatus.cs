@@ -13,5 +13,6 @@ namespace TicTacToeApp.Model
         WalkZero,
         WinCross,
         WinZero,
+        WinNobody,
     }
 }
